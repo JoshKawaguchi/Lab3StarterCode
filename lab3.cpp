@@ -15,15 +15,12 @@ int main()
 
 void test()
 {
-    Movie myTest(152,2008,5,14.99,"The Dark Knight");
-    myTest.addActor("josh","kawaguchi",2020);
-    myTest.addActor("josh","kawaguchi",2020);
-
+    Movie myTest(152,2008,4,14.99,"The Dark Knight");
     myTest.addActor("josh","kawaguchi",2020);
     myTest.addActor("josh","kawaguchi",2020);
     myTest.addActor("josh","kawaguchi",2020);
     myTest.addActor("josh","kawaguchi",2020);
-    myTest.addActor("josh","kawaguchi",2020);
+    //myTest.addActor("josh","kawaguchi",2020);
 
     myTest.printMovieInfo();
 

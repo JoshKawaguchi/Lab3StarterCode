@@ -5,12 +5,12 @@ using namespace std;
 
 Movie::Movie()
 {
-    this->movieTime = 0;
-    this->movieYearOut = 0;
-    this->numberOfActors = 0;
-    this->actorArrayIndex = 0;
-    this->moviePrice = 0;
-    this->movieTitle = "";
+    setMovieTime(0);
+    setMovieYearOut(0);
+    setNumberOfActors(0);
+    actorArrayIndex = 0;
+    setMoviePrice(0);
+    setMovieTitle("");
 }
 
 Movie::Movie(int movieTime, int movieYearOut, int numberOfActors, double moviePrice, std::string movieTitle)
@@ -18,7 +18,7 @@ Movie::Movie(int movieTime, int movieYearOut, int numberOfActors, double moviePr
     setMovieTime(movieTime);
     setMovieYearOut(movieYearOut);
     setNumberOfActors(numberOfActors);
-    this->actorArrayIndex = 0;
+    actorArrayIndex = 0;
     setMoviePrice(moviePrice);
     setMovieTitle(movieTitle);
 }
@@ -44,7 +44,9 @@ int Movie::getMovieYearOut()
 void Movie::setNumberOfActors(int numberOfActors)
 {
     this->numberOfActors = numberOfActors;
-    Movie::actors = new Actor[this->actorArrayIndex];
+//    Movie::actors = new Actor[this->actorArrayIndex];
+    Actor arr[15];
+    Movie::actors = new Actor[15];
 }
 int Movie::getNumberOfActors()
 {
@@ -55,7 +57,8 @@ void Movie::addActor(std::string firstName, std::string lastName, int DoB)
 {
     //Adds an actor to the actors array by constructing an Actor object with the attributes passed in
 
-    Movie::actors[actorArrayIndex++] = Actor(firstName,lastName,DoB);
+    Movie::actors[actorArrayIndex] = Actor(firstName,lastName,DoB);
+    actorArrayIndex++;
 }
 
 void Movie::setMoviePrice(double moviePrice)
@@ -81,19 +84,31 @@ void Movie::printMovieInfo()
     cout << "Title: " << getMovieTitle() << ", Published in: " << getMovieYearOut() << endl;
     cout << "Duration of Movie: " << getMovieTime() << " minutes" << endl;
     cout << "Price: $" << getMoviePrice() << endl << "Actors:" << endl;
-    for(int i = 0; i < this->numberOfActors; i++)
+    //cout << getNumberOfActors();
+    for(int i = 0; i < getNumberOfActors(); i++)
     {
-        cout << Movie::actors[i].getFirstName() << " " << Movie::actors[i].getLastName() << ", " << Movie::actors[i].getBirthYear() << endl;
+        cout << actors[i].getFirstName() << " " << actors[i].getLastName() << ", " << actors[i].getBirthYear();
+        if (i != numberOfActors - 1)
+        {
+            cout << endl;
+        }
     }
 }
 
-Movie::Movie(const Movie &m)
+Movie::Movie(Movie& m)//gives me a pointer
 {
     //Constructors a Movie object by deep copying all the attributes of the movie object passed in.
+    setMovieTime(m.getMovieTime());
+    setMovieYearOut(movieYearOut);
+    setNumberOfActors(numberOfActors);
+    this->actorArrayIndex = 0;
+    setMoviePrice(moviePrice);
+    setMovieTitle(movieTitle);
 }
 
 Movie::~Movie()
 {
     delete [] Movie::actors;
+    delete this;
     //Destroys the Movie object, making sure to not creating any memory leaks
 }

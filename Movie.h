@@ -15,7 +15,7 @@ public:
 	Actor* actors;
 	Movie();
 	Movie(int, int, int, double, std::string);
-	Movie(const Movie &m);
+	Movie(Movie& m);
 	~Movie();
 	void setMovieTime(int);
 	int getMovieTime();
