@@ -11,6 +11,7 @@ Movie::Movie()
     actorArrayIndex = 0;
     setMoviePrice(0);
     setMovieTitle("");
+    //Movie::actors = new Actor[15];
 }
 
 Movie::Movie(int movieTime, int movieYearOut, int numberOfActors, double moviePrice, std::string movieTitle)
@@ -21,6 +22,7 @@ Movie::Movie(int movieTime, int movieYearOut, int numberOfActors, double moviePr
     actorArrayIndex = 0;
     setMoviePrice(moviePrice);
     setMovieTitle(movieTitle);
+    //Movie::actors = new Actor[15];
 }
 
 void Movie::setMovieTime(int movieTime)
@@ -45,8 +47,7 @@ void Movie::setNumberOfActors(int numberOfActors)
 {
     this->numberOfActors = numberOfActors;
 //    Movie::actors = new Actor[this->actorArrayIndex];
-    Actor arr[15];
-    Movie::actors = new Actor[15];
+
 }
 int Movie::getNumberOfActors()
 {
@@ -57,7 +58,7 @@ void Movie::addActor(std::string firstName, std::string lastName, int DoB)
 {
     //Adds an actor to the actors array by constructing an Actor object with the attributes passed in
 
-    Movie::actors[actorArrayIndex] = Actor(firstName,lastName,DoB);
+    //::actors[actorArrayIndex] = Actor(firstName,lastName,DoB);
     actorArrayIndex++;
 }
 
@@ -87,11 +88,11 @@ void Movie::printMovieInfo()
     //cout << getNumberOfActors();
     for(int i = 0; i < getNumberOfActors(); i++)
     {
-        cout << actors[i].getFirstName() << " " << actors[i].getLastName() << ", " << actors[i].getBirthYear();
-        if (i != numberOfActors - 1)
-        {
-            cout << endl;
-        }
+//        cout << actors[i].getFirstName() << " " << actors[i].getLastName() << ", " << actors[i].getBirthYear();
+//        if (i != numberOfActors - 1)
+//        {
+//            cout << endl;
+//        }
     }
 }
 
@@ -99,16 +100,16 @@ Movie::Movie(Movie& m)//gives me a pointer
 {
     //Constructors a Movie object by deep copying all the attributes of the movie object passed in.
     setMovieTime(m.getMovieTime());
-    setMovieYearOut(movieYearOut);
-    setNumberOfActors(numberOfActors);
+    setMovieYearOut(m.getMovieYearOut());
+    setNumberOfActors(m.getNumberOfActors());
     this->actorArrayIndex = 0;
-    setMoviePrice(moviePrice);
-    setMovieTitle(movieTitle);
+    setMoviePrice(m.getMoviePrice());
+    setMovieTitle(m.getMovieTitle());
 }
 
 Movie::~Movie()
 {
-    delete [] Movie::actors;
+    //delete [] Movie::actors;
     delete this;
     //Destroys the Movie object, making sure to not creating any memory leaks
 }
